@@ -23,28 +23,31 @@ const CartContext = createContext<CartContextData>({} as CartContextData);
 
 export function CartProvider({ children }: CartProviderProps): JSX.Element {
   const [cart, setCart] = useState<Product[]>(() => {
-    // const storagedCart = Buscar dados do localStorage
+     const storagedCart = localStorage.getItem('@RocketShoes:cart');
 
-    // if (storagedCart) {
-    //   return JSON.parse(storagedCart);
-    // }
+     if (storagedCart) {
+       return JSON.parse(storagedCart);
+     }
 
     return [];
   });
 
   const addProduct = async (productId: number) => {
-    try {
-      // TODO
+    try {     // updatedCart recebe o array de cart, porem usando [...cart] eu estou criando um novo array com os valores de cart; 
+        const updatedCart = [...cart];
+        
+
+        
     } catch {
-      // TODO
+      toast.error('Quantidade solicitada fora de estoque');
     }
   };
 
   const removeProduct = (productId: number) => {
     try {
-      // TODO
+      
     } catch {
-      // TODO
+      
     }
   };
 
@@ -53,9 +56,9 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
     amount,
   }: UpdateProductAmount) => {
     try {
-      // TODO
+      
     } catch {
-      // TODO
+      
     }
   };
 
@@ -73,3 +76,7 @@ export function useCart(): CartContextData {
 
   return context;
 }
+
+
+
+//yarn test src/__tests__/components/Header.spec.tsx
