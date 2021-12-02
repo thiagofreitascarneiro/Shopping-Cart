@@ -48,7 +48,7 @@ const Home = (): JSX.Element => {
     <ProductList>
       {products.map( product =>
       <li>
-        <img src= {product.image} alt="Tênis de Caminhada Leve Confortável" />
+        <img src= {product.image} alt={product.title} />
         <strong>{product.title}</strong>
         <span>{`${formatPrice(product.price)}`}</span>
         <button
