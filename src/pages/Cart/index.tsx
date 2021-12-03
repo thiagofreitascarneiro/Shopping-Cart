@@ -21,7 +21,9 @@ const Cart = (): JSX.Element => {
    const { cart, removeProduct, updateProductAmount } = useCart();
 
    const cartFormatted = cart.map(product => ({
-     price: formatPrice(product.price * product.amount)
+     ...product,
+     subtotal: formatPrice(product.price * product.amount)
+      
    }))
    const total =
      formatPrice(
@@ -32,11 +34,11 @@ const Cart = (): JSX.Element => {
      )
 
   function handleProductIncrement(product: Product) {
-    // TODO
+      updateProductAmount({productId:product.id, amount:product.amount + 1 })
   }
 
   function handleProductDecrement(product: Product) {
-    // TODO
+      updateProductAmount({productId:product.id, amount:product.amount - 1 })
   }
 
   function handleRemoveProduct(productId: number) {
@@ -64,15 +66,15 @@ const Cart = (): JSX.Element => {
             </td>
             <td>
               <strong>{product.title}</strong>
-              <span>{product.price}</span>
+              <span>{`${formatPrice(product.price)}`}</span>
             </td>
             <td>
               <div>
                 <button
                   type="button"
                   data-testid="decrement-product"
-                // disabled={product.amount <= 1}
-                // onClick={() => handleProductDecrement()}
+                 disabled={product.amount <= 1}
+                 onClick={() => handleProductDecrement(product)}
                 >
                   <MdRemoveCircleOutline size={20} />
                 </button>
@@ -80,19 +82,19 @@ const Cart = (): JSX.Element => {
                   type="text"
                   data-testid="product-amount"
                   readOnly
-                  value={2}
+                  value={product.amount}
                 />
                 <button
                   type="button"
                   data-testid="increment-product"
-                // onClick={() => handleProductIncrement()}
+                 onClick={() => handleProductIncrement(product)}
                 >
                   <MdAddCircleOutline size={20} />
                 </button>
               </div>
             </td>
             <td>
-              <strong>0,00</strong>
+              <strong>{}</strong>
             </td>
             <td>
               <button

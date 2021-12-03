@@ -33,4 +33,3 @@ const Header = (): JSX.Element => {
 
 export default Header;
 
-//const findProduct = updatedCart.find(product => product.id === productId);
